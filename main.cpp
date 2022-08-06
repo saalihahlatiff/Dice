@@ -3,16 +3,28 @@
 #include<string>
 #include <cctype> 
 
+//using namespace std;
+
 std::string userInput;
+std::ifstream f_read;
 
 void GetUserInput(){
   std::cin >> userInput;
   tolower(userInput);
 }
 
-int main() {
-  ifstream f_read;
+bool Find(std::string s){
+  std::string fileWord;
+  while(!f_read.eof()){
+    f_read >> fileWord;
+    if(fileWord == s){
+      return true;
+    }
+  }
+  return false;
+}
 
+int main() {
   
   f_read.open("storage.txt");
   if(!(f_read.is_open())){
@@ -30,12 +42,14 @@ int main() {
     std::string username;
     std::cin >> username;
 
-    if(find(username, storage.txt) == std::string::npos){
+    bool foundUsername = Find(username);
+
+    if(!foundUsername){
       std::cout << "Error! Username does not exist" << std::endl;
     }
     
   }
   
-  file.close()
+  f_read.close()
   
 }
