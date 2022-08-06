@@ -3,12 +3,10 @@
 #include<string>
 #include <cctype> 
 
-//using namespace std;
-
 std::string userInput;
 std::ifstream f_read;
 
-void GetUserInput(){
+void GetUserChoice(){
   std::cin >> userInput;
   tolower(userInput);
 }
@@ -35,7 +33,7 @@ int main() {
   std::cout << "Welcome! " << std::endl
        << "(A) Log In            (B) New User Sign Up " << std::endl;
 
-  GetUserInput();
+  GetUserChoice();
 
   if(userInput == "a"){
     std::cout << "Enter username: " << std::endl;
