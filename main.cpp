@@ -1,14 +1,20 @@
 #include <iostream>
 #include <fstream>
 #include<string>
-#include <cctype> 
 
 std::string userInput;
 std::ifstream f_read;
 
-void GetUserChoice(){
+std::string GetUserChoice(){
   std::cin >> userInput;
-  tolower(userInput);
+  userInput = tolower(userInput[0]);
+  return userInput;
+}
+
+void Error(std::string error){
+  std::cout << "Error. " << error << std::endl;
+  std::cout << "Try again" << std::endl << std::endl;
+  std::cin >> userInput;
 }
 
 bool Find(std::string s){
@@ -43,11 +49,21 @@ int main() {
     bool foundUsername = Find(username);
 
     if(!foundUsername){
-      std::cout << "Error! Username does not exist" << std::endl;
+      Error("Username does not exist");
     }
+  else if(userInput == "b"){
+    std::cout << "Enter new username: " << std::endl;
+    std::string newUsername;
+    std::cin >> newUsername;
+    std::cout << std::endl << "Enter new password: " << std::endl 
+              << "password should have an uppercase letter, lowercase letter, a number, and a character";
+
+  
+  }
     
   }
   
-  f_read.close()
+  f_read.close();
   
+
 }
