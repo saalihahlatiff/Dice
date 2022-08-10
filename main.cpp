@@ -28,20 +28,17 @@ bool Find(std::string s){
   return false;
 }
 
-int main() {
-  
-  f_read.open("storage.txt");
-  if(!(f_read.is_open())){
-    std::cout << "File not found!" << std::endl;
-    return 1;
+void WelcomePage(){
+  if(userInput == "a"){
+    SignIn();
   }
 
-  std::cout << "Welcome! " << std::endl
-       << "(A) Log In            (B) New User Sign Up " << std::endl;
+  else if(userInput == "b"){
+    SignUp();
+  }
+}
 
-  GetUserChoice();
-
-  if(userInput == "a"){
+void SignIn(){
     std::cout << "Enter username: " << std::endl;
     std::string username;
     std::cin >> username;
@@ -51,18 +48,43 @@ int main() {
     if(!foundUsername){
       Error("Username does not exist");
     }
-  else if(userInput == "b"){
-    std::cout << "Enter new username: " << std::endl;
-    std::string newUsername;
-    std::cin >> newUsername;
-    std::cout << std::endl << "Enter new password: " << std::endl 
-              << "password should have an uppercase letter, lowercase letter, a number, and a character";
+}
 
-  
+void SignUp(){
+  NewUsername();
+  NewPassword();
+}
+
+void NewUsername(){
+  std::cout << "Create username: ";
+  std::string newUsername;
+  std::cin >> newUsername;
+
+  if(Find(newUsername)){
+    Error("Username alreacy exists");
   }
+
+}
+
+void NewPassword(){
+
+}
+
+int main() {
+  
+  f_read.open("storage.txt");
+  if(!(f_read.is_open())){
+    std::cout << "File not found!" << std::endl;
+    return 1;
+  }
+
+  std::cout << "            Welcome! " << std::endl
+            << "(A) Log In            (B) New User Sign Up " << std::endl;
+
+  GetUserChoice();
+
+  WelcomePage();
     
-  }
-  
   f_read.close();
   
 
