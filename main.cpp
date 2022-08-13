@@ -2,8 +2,22 @@
 #include <fstream>
 #include<string>
 
+
 std::string userInput;
 std::ifstream f_read;
+bool isError = true;
+
+//list of functions
+
+std::string GetUserChoice();
+void Error();
+bool Find();
+void WelcomePage();
+void LogIn();
+void SignUp();
+void NewUsername();
+void NewPassword();
+
 
 std::string GetUserChoice(){
   std::cin >> userInput;
@@ -29,25 +43,34 @@ bool Find(std::string s){
 }
 
 void WelcomePage(){
-  if(userInput == "a"){
-    SignIn();
-  }
+  std::cout << "            Welcome! " << std::endl
+            << "(A) Log In            (B) New User Sign Up " << std::endl;
+  
+  while(isError){
+    if(userInput == "a"){
+      LogIn();
+    }
 
-  else if(userInput == "b"){
-    SignUp();
+    else if(userInput == "b"){
+      SignUp();
+    }
+
+    else{
+      Error("Invalid input");
+    }
   }
 }
 
-void SignIn(){
-    std::cout << "Enter username: " << std::endl;
-    std::string username;
-    std::cin >> username;
+void LogIn(){
+  std::cout << "Enter username: " << std::endl;
+  std::string username;
+  std::cin >> username;
 
-    bool foundUsername = Find(username);
+  bool foundUsername = Find(username);
 
-    if(!foundUsername){
-      Error("Username does not exist");
-    }
+  if(!foundUsername){
+    Error("Username does not exist");
+  }
 }
 
 void SignUp(){
@@ -72,20 +95,7 @@ void NewPassword(){
 
 int main() {
   
-  f_read.open("storage.txt");
-  if(!(f_read.is_open())){
-    std::cout << "File not found!" << std::endl;
-    return 1;
-  }
-
-  std::cout << "            Welcome! " << std::endl
-            << "(A) Log In            (B) New User Sign Up " << std::endl;
-
-  GetUserChoice();
-
-  WelcomePage();
-    
-  f_read.close();
+  std::cout << "hello" << std::endl;
   
 
 }
