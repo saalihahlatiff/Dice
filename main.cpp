@@ -50,7 +50,7 @@ void WelcomePage(){
 
   GetUserChoice();
   
-  //while(isError){
+  //while(isError){   FIXME integrate error system
     if(userInput == "a"){
       LogIn();
     }
@@ -102,10 +102,11 @@ void NewUsername(){
   std::cin >> newUsername;
 
   if(Find(newUsername)){
-    Error("Username alreacy exists");
+    Error("Username already exists");
   }
 
   else{
+    //FIXME write new username into file
     f_write << newUsername;
     NewPassword();
   }
@@ -115,7 +116,7 @@ void NewPassword(){
   std::cout << "Create password: ";
   std::string newPassword;
   std::cin >> newPassword;
-
+  //FIXME write new password into file
   f_write << newPassword;
 
   std::cout << "New account created!" << std::endl;
@@ -134,7 +135,8 @@ int main() {
   }
 
   WelcomePage();
-    
+
+  //should return here
   f_read.close();
   f_write.close();
 
