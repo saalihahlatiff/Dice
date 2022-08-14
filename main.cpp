@@ -5,6 +5,7 @@
 
 std::string userInput;
 std::ifstream f_read;
+std::ofstream f_write;
 bool isError = true;
 
 //list of functions
@@ -17,6 +18,7 @@ void LogIn();
 void SignUp();
 void NewUsername();
 void NewPassword();
+int main();
 
 
 std::string GetUserChoice(){
@@ -45,8 +47,10 @@ bool Find(std::string s){
 void WelcomePage(){
   std::cout << "            Welcome! " << std::endl
             << "(A) Log In            (B) New User Sign Up " << std::endl;
+
+  GetUserChoice();
   
-  while(isError){
+  //while(isError){
     if(userInput == "a"){
       LogIn();
     }
@@ -58,18 +62,32 @@ void WelcomePage(){
     else{
       Error("Invalid input");
     }
-  }
+  //}
 }
 
 void LogIn(){
   std::cout << "Enter username: " << std::endl;
   std::string username;
+  std::string password;
   std::cin >> username;
 
   bool foundUsername = Find(username);
 
   if(!foundUsername){
     Error("Username does not exist");
+  }
+  else{
+    std::cout << "Enter password: ";
+    std::cin >> password;
+
+    bool foundPasswordOfUsername = Find(password);
+
+    if(!foundPasswordOfUsername){
+      Error("Incorrect password");
+    }
+    else{
+      std::cout << "Succefully logged in!" << std::endl;
+    }
   }
 }
 
@@ -87,15 +105,37 @@ void NewUsername(){
     Error("Username alreacy exists");
   }
 
-}
+  else{
+    f_write << newUsername;
+    NewPassword();
+  }
 
+}
 void NewPassword(){
+  std::cout << "Create password: ";
+  std::string newPassword;
+  std::cin >> newPassword;
+
+  f_write << newPassword;
+
+  std::cout << "New account created!" << std::endl;
+
+  main();
 
 }
 
 int main() {
   
-  std::cout << "hello" << std::endl;
-  
+  f_read.open("storage.txt");
+  f_write.open("storage.txt");
+  if(!(f_read.is_open())){
+    std::cout << "File not found!" << std::endl;
+    return 1;
+  }
+
+  WelcomePage();
+    
+  f_read.close();
+  f_write.close();
 
 }
