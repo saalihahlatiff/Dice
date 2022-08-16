@@ -2,7 +2,7 @@
 #include <fstream>
 #include<string>
 
-
+//how to get and put input from/into file
 std::string userInput;
 std::ifstream f_read;
 std::ofstream f_write;
@@ -136,7 +136,9 @@ int main() {
 
   WelcomePage();
 
+  //how to make it return back here?
   //should return here
+  //what format should the file be in?
   f_read.close();
   f_write.close();
 
