@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include<string>
+#include <string>
 
 //how to get and put input from/into file
 std::string userInput;

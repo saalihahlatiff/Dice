@@ -69,5 +69,6 @@
         "functional": "cpp",
         "iterator": "cpp",
         "utility": "cpp"
-    }
+    },
+    "liveServer.settings.port": 5501
 }
